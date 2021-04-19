@@ -1,4 +1,4 @@
-import {Body, HttpException, HttpStatus, Injectable, Post, UnauthorizedException} from '@nestjs/common';
+import {HttpException, HttpStatus, Injectable, UnauthorizedException} from '@nestjs/common';
 import {CreateUserDto} from "../users/dto/create-user.dto";
 import {UsersService} from "../users/users.service";
 import {JwtService} from "@nestjs/jwt";
@@ -11,11 +11,9 @@ export class AuthService {
     constructor(private userService: UsersService,
                 private jwtService: JwtService) {}
 
-
     async login(userDto: CreateUserDto) {
         const user = await this.validateUser(userDto)
         return this.generateToken(user)
-
     }
 
     async registration(userDto: CreateUserDto) {
